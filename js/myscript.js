@@ -35,25 +35,46 @@ setTimeout (function(){
 
  */
 
+//prendo la data a cui voglio far fermare il mio countdown in millisecondi
 let deadline =new Date("may 26, 2023 09:30:00").getTime();
-const clock = setInterval(function() {
-    let now = new Date().getTime();
-    let t = deadline - now;
-    let days = Math.floor (t / (1000 * 60 * 60 *24));
-    let hours = Math.floor ((t % (1000 * 60 * 60 *24)) / (1000 * 60 * 60));
-    let minutes = Math.floor ((t % (1000 * 60 * 60 *24)) / (1000 * 60));
-    let seconds = Math.floor ((t % (1000 * 60 * 60 *24)) / 1000);
 
+//inizializzo setInterval con una funzione anonima ( da poter fare anche in un secondo momento)
+const clock = setInterval(function() {
+
+    //recupero il timer del l'orario attuale
+    let now = new Date().getTime();
+
+    // sottraggo la data a cui voglio far fermare il mio countdown al tempo attuale
+    let t = deadline - now;
+
+    //inizio a fare un calcolo in base ai millisecondi derivati dal calcolo di "t" dove per calcolare i giorni devo moltiplicare 1000ms * 60m * 60h 24 cioe un giorno
+    let days = Math.floor (t / (1000 * 60 * 60 * 24));
+
+    //calcolo per ora
+    let hours = Math.floor ((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+    //calcolo per minuti
+    let minutes = Math.floor ((t % (1000 * 60 * 60 * 24)) / (1000 * 60));
+
+    //calcolo per secondi
+    let seconds = Math.floor ((t % (1000 * 60 * 60 * 24)) / 1000);
+
+    //aggiungo il risultato al codice precedentemente preparato
     document.getElementById("days").innerHTML = days;
     document.getElementById("hours").innerHTML = hours;
     document.getElementById("minutes").innerHTML = minutes;
     document.getElementById("seconds").innerHTML = seconds;
 
+    //aggiungo una variabile "se t sarà uguale a zero vorra dire che il tempo è scaduto "
     if (t < 0) {
+
+        //quindi blocco la funzione
         clearInterval (clock);
+
+        //aggiungo nel documento qualcosa per capirlo 
         document.getElementById("end").innerHTML = "Angel";
     }
- 
+    //??? da domandare a Riccardo
 }, 1000);
 
 
