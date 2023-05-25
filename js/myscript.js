@@ -36,16 +36,26 @@ setTimeout (function(){
  */
 
 let deadline =new Date("may 26, 2023 09:30:00").getTime();
+const clock = setInterval(function() {
+    let now = new Date().getTime();
+    let t = deadline - now;
+    let days = Math.floor (t / (1000 * 60 * 60 *24));
+    let hours = Math.floor ((t % (1000 * 60 * 60 *24)) / (1000 * 60 * 60));
+    let minutes = Math.floor ((t % (1000 * 60 * 60 *24)) / (1000 * 60));
+    let seconds = Math.floor ((t % (1000 * 60 * 60 *24)) / 1000);
 
-let now = new Date().getTime();
-let t = deadline - now;
-let days = Math.floor (t / (1000 * 60 * 60 *24));
-let hours = Math.floor ((t % (1000 * 60 * 60 *24)) / (1000 * 60 * 60));
-let minutes = Math.floor ((t % (1000 * 60 * 60 *24)) / (1000 * 60));
-let seconds = Math.floor ((t % (1000 * 60 * 60 *24)) / 1000);
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
+
+    if (t < 0) {
+        clearInterval (clock);
+        document.getElementById("end").innerHTML = "Angel";
+    }
+ 
+}, 1000);
 
 
-document.getElementById("days").innerHTML = days;
-document.getElementById("hours").innerHTML = hours;
-document.getElementById("minutes").innerHTML = minutes;
-document.getElementById("seconds").innerHTML = seconds;
+
+
