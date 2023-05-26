@@ -36,7 +36,7 @@ setTimeout (function(){
  */
 
 //prendo la data a cui voglio far fermare il mio countdown in millisecondi
-let deadline =new Date("may 26, 2023 09:30:00").getTime();
+let deadline =new Date("may 27, 2023 09:30:00").getTime();
 
 //inizializzo setInterval con una funzione anonima ( da poter fare anche in un secondo momento)
 const clock = setInterval(function() {
@@ -54,10 +54,10 @@ const clock = setInterval(function() {
     let hours = Math.floor ((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
     //calcolo per minuti
-    let minutes = Math.floor ((t % (1000 * 60 * 60 * 24)) / (1000 * 60));
+    let minutes = Math.floor ((t % (1000 * 60 * 60)) / (1000 * 60));
 
     //calcolo per secondi
-    let seconds = Math.floor ((t % (1000 * 60 * 60 * 24)) / 1000);
+    let seconds = Math.floor ((t % (1000 * 60)) / 1000);
 
     //aggiungo il risultato al codice precedentemente preparato
     document.getElementById("days").innerHTML = days;
@@ -66,7 +66,7 @@ const clock = setInterval(function() {
     document.getElementById("seconds").innerHTML = seconds;
 
     //aggiungo una variabile "se t sarà uguale a zero vorra dire che il tempo è scaduto "
-    if (t < 0) {
+    if (t <= 0) {
 
         //quindi blocco la funzione
         clearInterval (clock);
